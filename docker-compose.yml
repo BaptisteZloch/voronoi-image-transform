@@ -1,0 +1,13 @@
+version: "3"
+services:
+  voronoi:
+    build: .
+    container_name: voronoi
+    restart: unless-stopped
+    ports:
+      - 7898:7898
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge

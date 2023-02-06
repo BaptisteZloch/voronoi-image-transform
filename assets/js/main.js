@@ -8,6 +8,7 @@ let w,
 let lastw, lasth;
 
 img.addEventListener("load", imageLoaded, false);
+let inverse = false;
 
 function imageLoaded() {
   w = img.naturalWidth;
@@ -19,16 +20,26 @@ function imageLoaded() {
   ctx.clearRect(0, 0, w, h);
   ctx.drawImage(img, 0, 0);
   indata = ctx.getImageData(0, 0, w, h).data;
-
   resize(grayscale, w, h);
   updateBW();
 }
 
-function updateBW() {
+function invertImage(imgData) {
+  for (let i = 0; i < imgData.data.length; i += 4) {
+    imgData.data[i] = 255 - imgData.data[i];
+    imgData.data[i + 1] = 255 - imgData.data[i + 1];
+    imgData.data[i + 2] = 255 - imgData.data[i + 2];
+    imgData.data[i + 3] = 255;
+  }
+  return imgData;
+}
+
+function updateBW(inv = false) {
   let ctx = grayscale.getContext("2d"),
     idata = ctx.getImageData(0, 0, w, h),
     bwdata = idata.data,
     gray;
+  ctx.filter = "invert(1)";
   let r = rv.valueAsNumber,
     g = gv.valueAsNumber,
     b = bv.valueAsNumber,
@@ -39,6 +50,9 @@ function updateBW() {
     );
     bwdata[o] = bwdata[o + 1] = bwdata[o + 2] = gray;
     bwdata[o + 3] = indata[o + 3];
+  }
+  if (inverse) {
+    idata = invertImage(idata);
   }
   ctx.putImageData(idata, 0, 0);
   updateBitmap();
@@ -100,6 +114,14 @@ function calculateVoronoi() {
 rv.addEventListener("change", updateBW, false);
 gv.addEventListener("change", updateBW, false);
 bv.addEventListener("change", updateBW, false);
+iv.addEventListener(
+  "change",
+  (event) => {
+    inverse = !inverse;
+    updateBW(inverse);
+  },
+  false
+);
 
 scale.addEventListener("change", updateBitmap, false);
 light.addEventListener("change", updateBitmap, false);
@@ -142,5 +164,8 @@ function downloadResult() {
   let link = document.createElement("a");
   link.download = `voronoi-${new Date().toISOString()}.png`;
   link.href = out.toDataURL("image/png");
+  link.click();
+  link.download = `voronoi-${new Date().toISOString()}.svg`;
+  link.href = out.toDataURL("image/svg+xml");
   link.click();
 }

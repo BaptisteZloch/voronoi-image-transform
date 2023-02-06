@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Image to Voronoi</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+</head>
+
+<body>
+    <section id="s1">
+        <h2>1. Drop Image on Page</h2>
+        <img id="img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+        <canvas id="inp"></canvas>
+    </section>
+    <section id="s2">
+        <h2>2. Adjust Black &amp; White</h2>
+        <canvas id="grayscale"></canvas>
+        <div class="controls">
+            <label>R <input id="rv" type="range" min="0" max="1" value="1" step="0.01"></label>
+            <label>G <input id="gv" type="range" min="0" max="1" value="1" step="0.01"></label>
+            <label>B <input id="bv" type="range" min="0" max="1" value="1" step="0.01"></label>
+        </div>
+    </section>
+    <section id="s3">
+        <h2>3. Adjust Bitmap</h2>
+        <canvas id="bit"></canvas>
+        <div class="controls">
+            <label>scale <input id="scale" type="range" min="0.01" max="2" value="1" step="0.01"></label>
+            <label>light <input id="light" type="range" min="-192" max="192" value="0" step="1"></label>
+        </div>
+    </section>
+    <section id="s4">
+        <div>
+            <h2>4. Control Voronoi </h2>
+            <button onclick="downloadResult()">Download result</button>
+        </div>
+        <canvas id="out"></canvas>
+    </section>
+    <script src="./assets/js/rhill-voronoi-core.min.js"></script>
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

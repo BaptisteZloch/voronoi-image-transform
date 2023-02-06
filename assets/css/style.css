@@ -1,0 +1,104 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    overflow: hidden
+}
+
+body.hover #s1 {
+    background: green
+}
+
+/*canvas { position:absolute; top:0; left:0 }*/
+section {
+    width: 33.3vh;
+    height: 33.3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative
+}
+
+img,
+canvas {
+    height: 100%;
+    width: 100%;
+    object-fit: contain
+}
+
+#s1,
+#s2 {
+    border-bottom: 1px solid #999;
+}
+
+#s4 {
+    position: absolute;
+    top: 0;
+    left: 33.3vh;
+    width: 80vw;
+    height: 100vh;
+    border-left: 1px solid #999;
+}
+
+h2 {
+    display: block;
+    opacity: 0.5;
+    font-weight: bold;
+    margin: 0;
+    font-size: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    text-align: center
+}
+
+button {
+    display: block;
+    opacity: 0.5;
+    font-weight: bold;
+    margin: 0;
+    font-size: 100%;
+    position: absolute;
+    top: 2%;
+    left: 45%;
+    z-index: 2;
+    text-align: center
+}
+
+.controls {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.8)
+}
+
+label {
+    white-space: nowrap
+}
+
+label+label {
+    margin-left: 1em
+}
+
+#bit {
+    image-rendering: pixelated
+}
+
+#inp {
+    display: none
+}
+
+#s2 input {
+    width: 6.5vh
+}
+
+#s3 input {
+    width: 9vh
+}

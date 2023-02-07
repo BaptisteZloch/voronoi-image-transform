@@ -59,8 +59,8 @@ function updateBW(inv = false) {
 }
 
 function updateBitmap() {
-  let bw = Math.round(w * scale.value),
-    bh = Math.round(h * scale.value);
+  let bw = Math.round((w * scale.value) / 15),
+    bh = Math.round((h * scale.value) / 15);
   console.log("dim", bw, bh);
   if (bw !== lastw || bh !== lasth) {
     resize(bit, bw, bh);
